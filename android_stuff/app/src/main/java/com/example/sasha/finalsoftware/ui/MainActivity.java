@@ -1,4 +1,4 @@
-package com.example.sasha.finalsoftware;
+package com.example.sasha.finalsoftware.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
