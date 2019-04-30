@@ -45,7 +45,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener,
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions).build();
         accountInfo = (TextView)findViewById(R.id.accountInfo);
-        accountInfo.setText("Tech Prep");
+        accountInfo.setText("BabyNames");
 
     }
 
