@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cs4531.finalsoftware.R;
+import com.example.sasha.finalsoftware.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -45,7 +45,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener,
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions).build();
         accountInfo = (TextView)findViewById(R.id.accountInfo);
-        accountInfo.setText("Tech Prep");
+        accountInfo.setText("BabyNames");
 
     }
 

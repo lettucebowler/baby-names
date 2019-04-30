@@ -1,4 +1,4 @@
-package com.example.cs4531.finalsoftware
+package com.example.sasha.finalsoftware
 
 import org.junit.Test
 
