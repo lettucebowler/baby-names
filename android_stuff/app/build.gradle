@@ -4,10 +4,12 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.cs4531.finalsoftware"
+        applicationId "com.example.sasha.finalsoftware"
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
