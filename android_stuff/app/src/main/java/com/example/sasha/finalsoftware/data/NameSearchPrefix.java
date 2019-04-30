@@ -1,4 +1,4 @@
 package com.example.sasha.finalsoftware.data;
 
-public class NameSearchPrefix implements NameSearch {
+public class NameSearchPrefix extends NameSearch {
 }

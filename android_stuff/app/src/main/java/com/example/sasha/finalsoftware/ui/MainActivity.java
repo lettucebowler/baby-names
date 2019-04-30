@@ -7,13 +7,13 @@ import android.view.View;
 import com.example.sasha.finalsoftware.R;
 
 public class MainActivity extends AppCompatActivity {
-@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState){
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 }
     public void switchToNamesListed(View myView) {
-        Intent myIntent = new Intent(this, NamesListedActivity.class);
+        Intent myIntent = new Intent(MainActivity.this, NamesListedActivity.class);
         startActivity(myIntent);
     }
 }
