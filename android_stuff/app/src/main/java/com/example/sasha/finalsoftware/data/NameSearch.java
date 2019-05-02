@@ -2,6 +2,7 @@ package com.example.sasha.finalsoftware.data;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.*;
@@ -18,7 +19,7 @@ public class NameSearch {
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
-    public void getFromFirestore() {
+    public void getFromFirebase(TextView tv) {
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
@@ -27,10 +28,8 @@ public class NameSearch {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Iterable<DataSnapshot> userId = ds.getChildren();
                     for (DataSnapshot uId : userId) {
-                        String data = uId.toString();
-                        list.add(data);
-                        Log.w("TAG", data);
-
+                        tv.append((CharSequence) uId.getValue());
+                        return;
                     }
                 }
                 Log.w("TAG", String.valueOf(list));
