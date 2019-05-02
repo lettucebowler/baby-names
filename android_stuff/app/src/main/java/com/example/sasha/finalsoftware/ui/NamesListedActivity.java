@@ -12,7 +12,7 @@ public class NamesListedActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.names_listed);
-        nameSearch.getFromFirestore();
+        //nameSearch.getFromFirestore();
     }
 
 }

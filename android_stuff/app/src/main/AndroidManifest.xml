@@ -3,6 +3,7 @@
           package="com.example.sasha.finalsoftware">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -10,22 +11,24 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name="com.example.sasha.finalsoftware.ui.MainActivity">
-        </activity>
-
-        <activity android:name="com.example.sasha.finalsoftware.ui.NamesListedActivity">
-        </activity>
-
         <activity
-                android:name="com.example.sasha.finalsoftware.ui.LogIn"
-                android:label="@string/app_name">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN"/>
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                android:name=".ui.MyNamesActivity"
+                android:label="@string/title_activity_my_names"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".ui.MainActivity">
+        </activity>
+        <activity android:name=".ui.NamesListedActivity">
+        </activity>
+        <activity
+                android:name=".ui.LogIn"
+                android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
