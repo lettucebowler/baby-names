@@ -4,32 +4,43 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.*;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
 
 public class NameSearch {
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     public void getFromFirestore() {
-        db.collection("nameInfo")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> list = new ArrayList<>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Iterable<DataSnapshot> userId = ds.getChildren();
+                    for (DataSnapshot uId : userId) {
+                        String data = uId.toString();
+                        list.add(data);
+                        Log.w("TAG", data);
 
+                    }
+                }
+                Log.w("TAG", String.valueOf(list));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        rootRef.addListenerForSingleValueEvent(eventListener);
     }
 
 }
