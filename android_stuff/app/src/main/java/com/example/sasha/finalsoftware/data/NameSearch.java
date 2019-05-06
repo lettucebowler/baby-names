@@ -35,8 +35,12 @@ public class NameSearch {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Iterable<DataSnapshot> userId = ds.getChildren();
                     for (DataSnapshot uId : userId) {
-                        Log.w("TAG", uId.toString());
-                        return;
+                        if (uId.getKey().toString() == "name") {
+                            if (name == uId.getValue()) {
+                                nameList.add(name);
+                                Log.w("TAG", name);
+                            }
+                        }
                     }
                 }
                 Log.w("TAG", String.valueOf(nameList));

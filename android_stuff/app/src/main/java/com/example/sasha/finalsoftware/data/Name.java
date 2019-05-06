@@ -145,11 +145,6 @@ public class Name {
         return ret;
     }
 
-    /**
-     * Returns the hashcode value for this name ignoring rating and tagStatus.
-     *
-     * @return The hashcode value for this name.
-     */
     @Override
     public int hashCode() {
         int hash = 7;
