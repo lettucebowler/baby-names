@@ -13,7 +13,7 @@
             android:fitsSystemWindows="true"
             android:layout_height="@dimen/app_bar_height"
             android:layout_width="match_parent"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:theme="@style/AppTheme.AppBarOverlay" android:background="@color/colorMaroon">
 
         <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
@@ -22,7 +22,7 @@
                 android:layout_height="match_parent"
                 app:toolbarId="@+id/toolbar"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:contentScrim="?attr/colorPrimary">
+                app:contentScrim="@color/colorMaroon">
 
             <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -33,11 +33,15 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-    <LinearLayout
-            android:orientation="vertical"
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/nameLayout" android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp" android:layout_marginTop="180dp">
-    </LinearLayout>
+            android:layout_height="wrap_content" android:id="@+id/nameScroll"
+            android:paddingTop="150dp">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/nameLayout" android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+    </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

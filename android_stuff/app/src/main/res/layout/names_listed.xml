@@ -6,15 +6,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.example.sasha.finalsoftware.ui.NamesListedActivity">
-
-
-    <TextView
-            android:layout_width="386dp"
-            android:layout_height="259dp"
-            android:id="@+id/listedData" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.023"
-            app:layout_constraintVertical_bias="0.0"/>
+    <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/SearchScroll" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/searchButton" app:layout_constraintBottom_toTopOf="@+id/button">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/searchLinear">
+        </LinearLayout>
+    </ScrollView>
+    <Button
+            android:text="@android:string/search_go"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchButton" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="180dp"
+            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/searchBar" android:layout_marginTop="8dp"/>
+    <Button
+            android:text="View Name(s)"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" android:layout_marginEnd="8dp" android:layout_marginStart="8dp"/>
+    <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:id="@+id/searchBar" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+    <Spinner
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/sexSpinner" app:layout_constraintStart_toEndOf="@+id/searchButton"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/searchBar" android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/searchButton" android:layout_marginBottom="4dp"/>
 </android.support.constraint.ConstraintLayout>

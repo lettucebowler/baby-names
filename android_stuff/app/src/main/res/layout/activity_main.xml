@@ -9,18 +9,8 @@
 
     <Button
             android:text="Search Names"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content" android:id="@+id/searchNamesButton"
-            android:onClick="swtichToSearchNames"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/getNamesButton" android:layout_marginTop="8dp"
-            app:layout_constraintHorizontal_bias="0.501"/>
-    <Button
-            android:text="View Names"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content" android:id="@+id/getNamesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/searchButton"
             android:onClick="switchToNamesListed"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
@@ -28,11 +18,19 @@
             app:layout_constraintTop_toBottomOf="@+id/LikeListButton" android:layout_marginTop="8dp"/>
     <Button
             android:text="My Names"
-            android:layout_width="120dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/LikeListButton" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/LikeListButton" app:layout_constraintStart_toStartOf="@+id/searchButton"
+            app:layout_constraintEnd_toEndOf="@+id/searchButton"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="240dp"/>
+            android:layout_marginTop="300dp"/>
+    <Button
+            android:text="Discover Names"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/discoverButton"
+            app:layout_constraintTop_toBottomOf="@+id/searchButton" android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/searchButton"
+            app:layout_constraintStart_toStartOf="@+id/searchButton"/>
 
 </android.support.constraint.ConstraintLayout>
