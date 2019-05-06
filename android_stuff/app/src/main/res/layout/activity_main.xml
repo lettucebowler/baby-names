@@ -8,7 +8,7 @@
         tools:context="com.example.sasha.finalsoftware.ui.MainActivity">
 
     <Button
-            android:text="View Names"
+            android:text="Search Names"
             android:layout_width="120dp"
             android:layout_height="wrap_content" android:id="@+id/getNamesButton"
             android:onClick="switchToNamesListed"
@@ -24,5 +24,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="240dp"/>
+    <Button
+            android:text="Todo"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="146dp" android:id="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/getNamesButton" android:layout_marginTop="8dp"/>
 
 </android.support.constraint.ConstraintLayout>
