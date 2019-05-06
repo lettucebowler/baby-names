@@ -76,19 +76,14 @@ public class NamesListedActivity extends AppCompatActivity {
                 search = searchBar.getQuery().toString();
                 System.out.println(search);
             } catch (StringIndexOutOfBoundsException ef) {
-                search = "";
+                search = "*";
             }
-            String temp1 = search.substring(1);
-            temp1 = temp1.toLowerCase();
-            Character temp2 = search.charAt(0);
-            String temp3 = temp2.toString().toUpperCase();
-            search = temp3 + temp1;
             searchLayout.removeAllViews();
             temp = search;
             System.out.println("True");
             System.out.println(temp);
             nameList.forEach(name -> {
-                if (name.getName().matches(temp.replace("?", ".?").replace("*", ".*?")) && name.getSex().equals(gender)) {
+                if (name.getName().toLowerCase().matches(temp.replace("?", ".?").replace("*", ".*?").toLowerCase()) && name.getSex().equals(gender)) {
                     CheckBox tempCheck = new CheckBox(getApplicationContext());
                     tempCheck.setText(name.getName());
                     tempCheck.setTextSize(36);
