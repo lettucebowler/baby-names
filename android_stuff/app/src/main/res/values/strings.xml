@@ -92,4 +92,8 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_liked_names">LikedNamesActivity</string>
+    <string-array name="sex_array">
+        <item>boy</item>
+        <item>girl</item>
+    </string-array>
 </resources>
