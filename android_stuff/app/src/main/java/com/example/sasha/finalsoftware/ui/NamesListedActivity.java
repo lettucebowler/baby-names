@@ -24,6 +24,7 @@ public class NamesListedActivity extends AppCompatActivity {
     private static LinearLayout searchLayout;
     private static Spinner sexSpinner;
     private String gender;
+    private String temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +74,8 @@ public class NamesListedActivity extends AppCompatActivity {
             String search;
             try {
                 search = searchBar.getQuery().toString();
-            }
-            catch(StringIndexOutOfBoundsException ef) {
+                System.out.println(search);
+            } catch (StringIndexOutOfBoundsException ef) {
                 search = "";
             }
             String temp1 = search.substring(1);
@@ -83,9 +84,11 @@ public class NamesListedActivity extends AppCompatActivity {
             String temp3 = temp2.toString().toUpperCase();
             search = temp3 + temp1;
             searchLayout.removeAllViews();
-            String temp = search;
+            temp = search;
+            System.out.println("True");
+            System.out.println(temp);
             nameList.forEach(name -> {
-                if (name.getName().equals(temp) && name.getSex().equals(gender)) {
+                if (name.getName().matches(temp.replace("?", ".?").replace("*", ".*?")) && name.getSex().equals(gender)) {
                     CheckBox tempCheck = new CheckBox(getApplicationContext());
                     tempCheck.setText(name.getName());
                     tempCheck.setTextSize(36);
@@ -93,6 +96,7 @@ public class NamesListedActivity extends AppCompatActivity {
                 }
             });
         });
+
     }
 
 }
