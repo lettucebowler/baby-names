@@ -21,10 +21,12 @@ public class NameSearch {
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     public Context context;
     public List nameList;
+    public Name myName;
 
     public NameSearch(Context context) {
         this.context = context;
         nameList = new ArrayList<Name>();
+        myName = new Name();
     }
 
     public void getFromFirebase(String name, String yearStart, String yearEnd) {
@@ -34,16 +36,13 @@ public class NameSearch {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Iterable<DataSnapshot> userId = ds.getChildren();
-                    for (DataSnapshot uId : userId) {
-                        if (uId.getKey().toString() == "name") {
-                            if (name == uId.getValue()) {
-                                nameList.add(name);
-                                Log.w("TAG", name);
-                            }
-                        }
+                    String temp;
+                    temp = ds.child("name").getValue(String.class);
+                    if (temp.equals(name)) {
+                        Log.w("temp is " + temp, "should be " + ds.child("name").getValue(String.class));
                     }
+                        //Log.w("NAME IS(should be John)", ds.child("name").getValue().toString());
                 }
-                Log.w("TAG", String.valueOf(nameList));
             }
 
             @Override
