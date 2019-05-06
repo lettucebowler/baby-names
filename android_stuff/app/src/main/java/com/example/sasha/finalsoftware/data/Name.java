@@ -1,9 +1,5 @@
 package com.example.sasha.finalsoftware.data;
 
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class Name {
 
     private String name;
@@ -82,47 +78,6 @@ public class Name {
         this.tagStatus = tagStatus;
     }
 
-    public JSONObject toJSON() throws JSONException {
-        JSONObject nameJSON = new JSONObject();
-
-        try {
-            nameJSON.put("name", this.getName());
-            nameJSON.put("year", this.getYear());
-            nameJSON.put("popularity", this.getPopularity());
-            nameJSON.put("sex", this.getSex());
-        } catch (JSONException je) {
-            throw new JSONException("Unexpected error in writing fields to JSONObject");
-        }
-
-        return nameJSON;
-    }
-
-    public void fromJSON(JSONObject res) throws JSONException {
-        String fromJSONName;
-        int fromJSONYear;
-        double fromJSONPopularity;
-        Sex fromJSONSex;
-
-        try {
-            fromJSONName = res.getString("name");
-            fromJSONYear = res.getInt("year");
-            fromJSONPopularity = res.getDouble("percent");
-            fromJSONSex = Sex.fromString(res.getString("sex"));
-        } catch (JSONException je) {
-            throw new JSONException("The passed in JSONObject is not a valid JSON representation" +
-                    " of a Name.");
-        }
-
-        if (res.length() == 4) {
-            this.setName(fromJSONName);
-            this.setYear(fromJSONYear);
-            this.setPopularity(fromJSONPopularity);
-            this.setSex(fromJSONSex);
-        } else {
-            throw new JSONException("The passed in JSONObject is not a valid JSON representation" +
-                    " Name.");
-        }
-    }
 
     @Override
     public boolean equals(Object obj) {
