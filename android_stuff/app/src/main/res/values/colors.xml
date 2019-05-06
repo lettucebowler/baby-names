@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">@color/colorMaroon</color>
+    <color name="colorPrimaryDark">@color/colorMaroon</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorMaroon">#7a0019</color>
     <color name="colorGold">#ffcc33</color>
