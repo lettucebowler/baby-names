@@ -22,8 +22,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(myIntent);
     }
 
-    private void switchToMyNames() {
+    public void switchToMyNames() {
         Intent myIntent = new Intent(MainActivity.this, MyNamesActivity.class);
+        startActivity(myIntent);
+    }
+
+    public void swtichToSearchNames(View myView) {
+        Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
         startActivity(myIntent);
     }
 }

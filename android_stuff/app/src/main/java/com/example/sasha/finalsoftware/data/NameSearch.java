@@ -1,5 +1,6 @@
 package com.example.sasha.finalsoftware.data;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.TextView;
@@ -18,21 +19,27 @@ import static android.support.constraint.Constraints.TAG;
 public class NameSearch {
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    public Context context;
+    public List nameList;
 
-    public void getFromFirebase(TextView tv) {
+    public NameSearch(Context context) {
+        this.context = context;
+        nameList = new ArrayList<Name>();
+    }
+
+    public void getFromFirebase(String name, String yearStart, String yearEnd) {
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<String> list = new ArrayList<>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Iterable<DataSnapshot> userId = ds.getChildren();
                     for (DataSnapshot uId : userId) {
-                        tv.append((CharSequence) uId.getValue());
+                        Log.w("TAG", uId.toString());
                         return;
                     }
                 }
-                Log.w("TAG", String.valueOf(list));
+                Log.w("TAG", String.valueOf(nameList));
             }
 
             @Override
