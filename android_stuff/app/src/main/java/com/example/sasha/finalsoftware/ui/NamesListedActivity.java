@@ -18,6 +18,8 @@ import java.util.List;
 
 public class NamesListedActivity extends AppCompatActivity {
     private List<Name> nameList;
+    private static FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private static DatabaseReference mDatabase = db.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +39,52 @@ public class NamesListedActivity extends AppCompatActivity {
             Character temp2 = search.charAt(0);
             String temp3 = temp2.toString().toUpperCase();
             search = temp3 + temp1;
-//            System.out.println(search + "\n");
-            nameList.clear();
-            nameList = NameSearchPrefix.prefixSearch(search);
+            String searchStart = search;
+            String searchEnd = search;
+            String temp4 = search.substring(search.length() - 2);
+            System.out.println(temp4);
+            if(temp4.equals("-P") || temp4.equals("-p")) {
+                final String substring = search.substring(0, search.length() - 3);
 
+                searchStart = substring;
+                searchEnd = substring + "z";
+            }
+//            System.out.println(search + "\n");
+
+
+            nameList.clear();
+            mDatabase.orderByChild("name").startAt(searchStart).endAt(searchEnd)
+                    .addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                            Name tempName = dataSnapshot.getValue(Name.class);
+                            System.out.println(tempName.getName() + "\n");
+                            nameList.add(tempName);
+                            searchButton.setEnabled(true);
+                        }
+
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 // ...
             });
-
-        });
     }
 
 }
