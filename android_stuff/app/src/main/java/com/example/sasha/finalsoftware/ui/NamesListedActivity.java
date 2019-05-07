@@ -115,15 +115,19 @@ public class NamesListedActivity extends AppCompatActivity {
         saveNameList = getNames();
         System.out.println("saveNames");
         saveNameList.addAll(getSelected());
-        SharedPreferences.Editor editor = mPrefs.edit();
-
-        Set<String> set = new HashSet<>();
-        for (int i = 0; i < saveNameList.size(); i++) {
-            System.out.println(saveNameList.get(i).getJSONObject().toString());
-            set.add(saveNameList.get(i).getJSONObject().toString());
+        if(saveNameList.size() > 0) {
+            SharedPreferences.Editor editor = mPrefs.edit();
+            Set<String> set = new HashSet<>();
+            for (int i = 0; i < saveNameList.size(); i++) {
+                System.out.println(saveNameList.get(i).getJSONObject().toString());
+                set.add(saveNameList.get(i).getJSONObject().toString());
+            }
+            editor.putStringSet("saveNames", set);
+            editor.commit();
         }
-        editor.putStringSet("saveNames", set);
-        editor.commit();
+        else {
+            Toast.makeText(getApplicationContext(),"No names to save.",Toast.LENGTH_SHORT).show();
+        }
     }
 
     public ArrayList<Name> getNames() {
@@ -169,24 +173,31 @@ public class NamesListedActivity extends AppCompatActivity {
 
     private ArrayList<Name> getSelected() {
         ArrayList<Name> selected = new ArrayList<>();
-        for (int i = 0; i < searchLayout.getChildCount(); i++) {
-            CheckBox tempBox = (CheckBox) searchLayout.getChildAt(i);
-            if (tempBox.isChecked()) {
-                String tempNameString = tempBox.getText().toString();
+        if(searchLayout.getChildCount() > 0) {
+            for (int i = 0; i < searchLayout.getChildCount(); i++) {
+                CheckBox tempBox = (CheckBox) searchLayout.getChildAt(i);
+                if (tempBox.isChecked()) {
+                    String tempNameString = tempBox.getText().toString();
 //                System.out.println(tempNameString);
-                if (selected.size() == 0) {
-                    selected.add(fetch(tempNameString));
-                } else {
-                    Boolean contains = false;
-                    for (int h = 0; h < selected.size(); h++) {
-                        if (saveNameList.get(h).getName().equals(tempNameString)) {
-                            contains = true;
-                            System.out.println(tempNameString);
+                    if (selected.size() == 0) {
+                        selected.add(fetch(tempNameString));
+                    } else {
+                        Boolean contains = false;
+                        if(!saveNameList.isEmpty()) {
+                            for (int h = 0; h < selected.size(); h++) {
+                                if (saveNameList.get(h).getName().equals(tempNameString)) {
+                                    contains = true;
+                                    System.out.println(tempNameString);
+                                }
+                            }
                         }
+                        if(!contains) saveNameList.add(fetch(tempNameString));
                     }
-                    if(!contains) saveNameList.add(fetch(tempNameString));
                 }
             }
+        }
+        else {
+            Toast.makeText(getApplicationContext(),"No Names",Toast.LENGTH_SHORT).show();
         }
         return selected;
     }
