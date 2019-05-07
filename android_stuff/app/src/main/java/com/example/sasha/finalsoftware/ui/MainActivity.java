@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import com.example.sasha.finalsoftware.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -22,8 +20,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(myIntent);
     }
 
-    private void switchToMyNames() {
+    public void switchToMyNames() {
         Intent myIntent = new Intent(MainActivity.this, MyNamesActivity.class);
         startActivity(myIntent);
     }
+
 }

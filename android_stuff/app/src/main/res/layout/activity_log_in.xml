@@ -16,16 +16,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.common.SignInButton>
 
-    <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="310dp"
-            android:layout_height="309dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/googleLogIn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
     <Button
             android:id="@+id/googleLogOut"
             android:layout_width="wrap_content"
@@ -44,7 +34,6 @@
             android:id="@+id/accountInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -52,10 +41,9 @@
             android:textColor="@color/colorWhite"
             android:textSize="75sp"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="BabyNames" app:layout_constraintVertical_bias="0.549"/>
+            tools:text="BabyNames"/>
 
 </android.support.constraint.ConstraintLayout>
