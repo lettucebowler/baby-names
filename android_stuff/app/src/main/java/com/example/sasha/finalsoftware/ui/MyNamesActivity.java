@@ -92,6 +92,7 @@ public class MyNamesActivity extends AppCompatActivity {
             Button getButton = new Button(getApplicationContext());
             getButton.setText("Find Names");
             getButton.setOnClickListener(e -> {
+                ArrayList<Name> sendList = new ArrayList<>();
                 Intent myIntent = new Intent(getApplicationContext(), NamesListedActivity.class);
                 startActivity(myIntent);
             });

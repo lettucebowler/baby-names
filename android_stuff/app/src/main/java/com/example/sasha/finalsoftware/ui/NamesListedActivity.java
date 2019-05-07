@@ -33,6 +33,7 @@ public class NamesListedActivity extends AppCompatActivity {
     private SharedPreferences mPrefs;
     private CheckBox tempCheck;
     private ArrayList<Name> retrieved;
+    private ArrayList<Name> saveNameList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,31 +110,11 @@ public class NamesListedActivity extends AppCompatActivity {
         });
 
     }
-    
-    public void saveNames(View view) {
-        ArrayList<Name> saveNameList = getNames();
-        System.out.println("saveNames");
-        for (int i = 0; i < searchLayout.getChildCount(); i++) {
-            CheckBox tempBox = (CheckBox) searchLayout.getChildAt(i);
-            if (tempBox.isChecked()) {
-                String tempNameString = tempBox.getText().toString();
-//                System.out.println(tempNameString);
-                if (saveNameList.size() == 0) {
-                    saveNameList.add(fetch(tempNameString));
-                } else {
-                    Boolean contains = false;
-                    for (int h = 0; h < saveNameList.size(); h++) {
-                        if (saveNameList.get(h).getName().equals(tempNameString)) {
-                            contains = true;
-                            System.out.println(tempNameString);
-                        }
-                    }
-                    if(!contains) saveNameList.add(fetch(tempNameString));
-                }
-            }
-        }
 
-//        mPrefs = getPreferences(MODE_PRIVATE);
+    public void saveNames(View view) {
+        saveNameList = getNames();
+        System.out.println("saveNames");
+        saveNameList.addAll(getSelected());
         SharedPreferences.Editor editor = mPrefs.edit();
 
         Set<String> set = new HashSet<>();
@@ -184,5 +165,29 @@ public class NamesListedActivity extends AppCompatActivity {
             }
         }
         return null;
+    }
+
+    private ArrayList<Name> getSelected() {
+        ArrayList<Name> selected = new ArrayList<>();
+        for (int i = 0; i < searchLayout.getChildCount(); i++) {
+            CheckBox tempBox = (CheckBox) searchLayout.getChildAt(i);
+            if (tempBox.isChecked()) {
+                String tempNameString = tempBox.getText().toString();
+//                System.out.println(tempNameString);
+                if (selected.size() == 0) {
+                    selected.add(fetch(tempNameString));
+                } else {
+                    Boolean contains = false;
+                    for (int h = 0; h < selected.size(); h++) {
+                        if (saveNameList.get(h).getName().equals(tempNameString)) {
+                            contains = true;
+                            System.out.println(tempNameString);
+                        }
+                    }
+                    if(!contains) saveNameList.add(fetch(tempNameString));
+                }
+            }
+        }
+        return selected;
     }
 }
