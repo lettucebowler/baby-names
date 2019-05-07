@@ -29,12 +29,21 @@
             app:layout_constraintTop_toBottomOf="@+id/searchBar" android:layout_marginTop="8dp"/>
     <Button
             android:text="View Name(s)"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/saveNamesButton"/>
+    <Button
+            android:text="Save Name(s)"
             android:onClick="saveNames"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/button" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp" android:layout_marginEnd="8dp" android:layout_marginStart="8dp"/>
+            android:id="@+id/saveNamesButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/button" android:layout_marginEnd="8dp"/>
     <SearchView
             android:layout_width="match_parent"
             android:layout_height="0dp"

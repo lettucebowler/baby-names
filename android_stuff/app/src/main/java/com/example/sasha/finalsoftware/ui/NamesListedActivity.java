@@ -32,7 +32,6 @@ public class NamesListedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         ArrayList<String> retrieved = new ArrayList<String>(PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getStringSet("names", new HashSet<String>()));
         Log.w("IN ON CREATE", retrieved.toString());
-
         mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.names_listed);
