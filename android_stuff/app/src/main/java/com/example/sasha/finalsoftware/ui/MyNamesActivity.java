@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.example.sasha.finalsoftware.R;
+import com.example.sasha.finalsoftware.data.Name;
 import com.google.api.Distribution;
 
 import java.util.ArrayList;
