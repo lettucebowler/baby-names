@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -13,7 +13,9 @@
             android:fitsSystemWindows="true"
             android:layout_height="@dimen/app_bar_height"
             android:layout_width="match_parent"
-            android:theme="@style/AppTheme.AppBarOverlay" android:background="@color/colorMaroon">
+            android:theme="@style/AppTheme.AppBarOverlay" android:background="@color/colorMaroon"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
         <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
@@ -29,19 +31,35 @@
                     android:layout_height="?attr/actionBarSize"
                     android:layout_width="match_parent"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+                    app:popupTheme="@style/AppTheme.PopupOverlay" android:layout_marginBottom="8dp"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/nameScroll"
-            android:paddingTop="150dp">
+            android:layout_height="0dp" android:id="@+id/nameScroll"
+            tools:layout_editor_absoluteX="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/unsaveButton" android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar">
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/nameLayout" android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"/>
+                android:layout_height="wrap_content" android:id="@+id/nameLayout" android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"/>
     </ScrollView>
+    <Button
+            android:text="Unsave Name(s)"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/unsaveButton" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"/>
+    <Button
+            android:text="View Popularity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/graphButton" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"/>
 
-</android.support.design.widget.CoordinatorLayout>
+</android.support.constraint.ConstraintLayout>

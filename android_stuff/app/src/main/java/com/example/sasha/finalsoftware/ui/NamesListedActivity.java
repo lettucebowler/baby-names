@@ -12,7 +12,6 @@ import android.widget.*;
 import com.example.sasha.finalsoftware.R;
 import com.example.sasha.finalsoftware.data.Name;
 import com.google.firebase.database.*;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,10 +26,11 @@ public class NamesListedActivity extends AppCompatActivity {
     private String temp;
     private SharedPreferences mPrefs;
     private CheckBox tempCheck;
+    private ArrayList<String> retrieved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ArrayList<String> retrieved = new ArrayList<String>(PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getStringSet("names", new HashSet<String>()));
+        retrieved = new ArrayList<>(PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getStringSet("names", new HashSet<String>()));
         Log.w("IN ON CREATE", retrieved.toString());
         mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         super.onCreate(savedInstanceState);
@@ -87,7 +87,8 @@ public class NamesListedActivity extends AppCompatActivity {
             System.out.println("True");
             System.out.println(temp);
             nameList.forEach(name -> {
-                if (name.getName().toLowerCase().matches(temp.replace("?", ".?").replace("*", ".*?").toLowerCase()) && name.getSex().equals(gender)) {
+                if (name.getName().toLowerCase().matches(temp.replace("?", ".?").replace("*",
+                        ".*?").toLowerCase()) && name.getSex().equals(gender)) {
                     tempCheck = new CheckBox(getApplicationContext());
                     tempCheck.setText(name.getName());
                     tempCheck.setTextSize(36);
@@ -104,7 +105,7 @@ public class NamesListedActivity extends AppCompatActivity {
     }
 
     public void saveNames(View view) {
-        ArrayList<String> saveNameList = new ArrayList<>();
+        ArrayList<String> saveNameList = retrieved;
         for (int i = 0; i < searchLayout.getChildCount(); i++) {
             view = searchLayout.getChildAt(i);
             if (view instanceof CheckBox) {
@@ -118,11 +119,11 @@ public class NamesListedActivity extends AppCompatActivity {
         SharedPreferences.Editor edit = mPrefs.edit();
         edit.putStringSet("names", new HashSet<String>(saveNameList));
         edit.commit();
-        for (int i = 0; i < saveNameList.size(); i++) {
-            Log.w("NAME IN INDEX " + i, saveNameList.get(i));
-        }
-        ArrayList<String> retrieved = new ArrayList<String>(PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getStringSet("names", new HashSet<String>()));
-        Log.w("TEST", "SIZE IS " + retrieved.size());
+//        for (int i = 0; i < saveNameList.size(); i++) {
+//            Log.w("NAME IN INDEX " + i, saveNameList.get(i));
+//        }
+//        retrieved = new ArrayList<String>(PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getStringSet("names", new HashSet<String>()));
+//        Log.w("TEST", "SIZE IS " + retrieved.size());
 
     }
 

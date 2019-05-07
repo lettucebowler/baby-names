@@ -28,7 +28,7 @@
             android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintTop_toBottomOf="@+id/searchBar" android:layout_marginTop="8dp"/>
     <Button
-            android:text="Compare Names"
+            android:text="View Popularity"
             android:layout_width="0dp"
             android:layout_height="wrap_content" app:layout_constraintStart_toEndOf="@+id/saveNamesButton"
             app:layout_constraintTop_toTopOf="@+id/saveNamesButton" app:layout_constraintEnd_toEndOf="parent"
