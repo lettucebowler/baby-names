@@ -1,5 +1,6 @@
 package com.example.sasha.finalsoftware.data;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,7 +50,8 @@ public class Name {
             obj.put("id", this.id);
             obj.put("name", this.name);
             obj.put("sex", this.sex);
-            obj.put("popularity", this.popularity);
+            JSONArray popularityArray = new JSONArray(this.popularity);
+            obj.put("popularity", popularityArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }

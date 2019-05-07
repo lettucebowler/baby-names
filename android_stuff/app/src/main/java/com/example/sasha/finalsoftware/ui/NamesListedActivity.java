@@ -36,11 +36,11 @@ public class NamesListedActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        retrieved = getNames();
-        Log.w("IN ON CREATE", retrieved.toString());
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.names_listed);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        retrieved = getNames();
+        Log.w("IN ON CREATE", retrieved.toString());
         nameList = new ArrayList<>();
         SearchView searchBar = findViewById(R.id.searchBar);
         searchBar.setQueryHint("Baby Name");
@@ -109,14 +109,7 @@ public class NamesListedActivity extends AppCompatActivity {
         });
 
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        // Do extra stuff here
-    }
-
+    
     public void saveNames(View view) {
         ArrayList<Name> saveNameList = getNames();
         System.out.println("saveNames");
@@ -124,7 +117,7 @@ public class NamesListedActivity extends AppCompatActivity {
             CheckBox tempBox = (CheckBox) searchLayout.getChildAt(i);
             if (tempBox.isChecked()) {
                 String tempNameString = tempBox.getText().toString();
-                System.out.println(tempNameString);
+//                System.out.println(tempNameString);
                 if (saveNameList.size() == 0) {
                     saveNameList.add(fetch(tempNameString));
                 } else {
@@ -139,11 +132,8 @@ public class NamesListedActivity extends AppCompatActivity {
                 }
             }
         }
-//        SharedPreferences.Editor edit = mPrefs.edit();
-//        edit.putStringSet("names", new HashSet<String>(saveNameList));
-//        edit.commit();
 
-        SharedPreferences mPrefs = getSharedPreferences("saveNames", 0);
+//        mPrefs = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = mPrefs.edit();
 
         Set<String> set = new HashSet<>();
@@ -156,9 +146,8 @@ public class NamesListedActivity extends AppCompatActivity {
     }
 
     public ArrayList<Name> getNames() {
-        mPrefs = getPreferences(MODE_PRIVATE);
         ArrayList<Name> items = new ArrayList<Name>();
-        Set<String> set = mPrefs.getStringSet("saveNames", null);
+        Set<String> set = mPrefs.getStringSet("saveNames", new HashSet<>());
         if (set != null) {
             for (String s : set) {
                 try {

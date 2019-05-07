@@ -37,9 +37,9 @@ public class MyNamesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_names);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         retrieved = getNames();
         Log.w("IN ON CREATE", retrieved.toString());
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         Button graphButton = findViewById(R.id.graphButton);
         graphButton.setOnClickListener(e -> {
             Intent myIntent = new Intent(getApplicationContext(), GraphActivity.class);
@@ -65,7 +65,6 @@ public class MyNamesActivity extends AppCompatActivity {
                         }
                     }
                 }
-                SharedPreferences mPrefs = getApplicationContext().getSharedPreferences("saveNames", 0);
                 SharedPreferences.Editor editor = mPrefs.edit();
                 Set<String> set = new HashSet<>();
                 for (int i = 0; i < retrieved.size(); i++) {
@@ -75,6 +74,7 @@ public class MyNamesActivity extends AppCompatActivity {
                 editor.commit();
 
             }
+            refresh();
         });
     }
 
@@ -100,32 +100,36 @@ public class MyNamesActivity extends AppCompatActivity {
     }
 
     public ArrayList<Name> getNames() {
-        SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+//        SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
         ArrayList<Name> items = new ArrayList<>();
-        Set<String> set = mPrefs.getStringSet("saveNames", null);
-        if (set != null) {
-            System.out.println("not null");
+        Set<String> set = mPrefs.getStringSet("saveNames", new HashSet<>());
+//        if (set != null) {
+//            System.out.println("not null");
             for (String s : set) {
                 try {
                     JSONObject jsonObject = new JSONObject(s);
+                    System.out.println("json " + jsonObject.toString());
                     String id = jsonObject.getString("id");
                     String name = jsonObject.getString("name");
                     String sex = jsonObject.getString("sex");
                     ArrayList<Double> popularity = new ArrayList<>();
+
                     JSONArray jArray = jsonObject.getJSONArray("popularity");
                     if (jArray != null) {
                         for (int i = 0; i < jArray.length(); i++) {
                             popularity.add(jArray.getDouble(i));
+
                         }
                     }
                     Name tName = new Name(name, sex, id, popularity);
                     System.out.println(tName.getName());
                     items.add(tName);
                 } catch (JSONException e) {
+                    System.out.println(e.getMessage());
                     e.printStackTrace();
                 }
             }
-        }
+//        }
         return items;
     }
 }
