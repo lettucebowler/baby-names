@@ -1,4 +1,5 @@
 package com.example.sasha.finalsoftware.ui;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,9 +13,14 @@ import android.widget.*;
 import com.example.sasha.finalsoftware.R;
 import com.example.sasha.finalsoftware.data.Name;
 import com.google.firebase.database.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class NamesListedActivity extends AppCompatActivity {
     private static FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -26,11 +32,11 @@ public class NamesListedActivity extends AppCompatActivity {
     private String temp;
     private SharedPreferences mPrefs;
     private CheckBox tempCheck;
-    private ArrayList<String> retrieved;
+    private ArrayList<Name> retrieved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        retrieved = new ArrayList<>(PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getStringSet("names", new HashSet<String>()));
+        retrieved = getNames();
         Log.w("IN ON CREATE", retrieved.toString());
         mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         super.onCreate(savedInstanceState);
@@ -104,27 +110,90 @@ public class NamesListedActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        // Do extra stuff here
+    }
+
     public void saveNames(View view) {
-        ArrayList<String> saveNameList = retrieved;
+        ArrayList<Name> saveNameList = getNames();
+        System.out.println("saveNames");
         for (int i = 0; i < searchLayout.getChildCount(); i++) {
-            view = searchLayout.getChildAt(i);
-            if (view instanceof CheckBox) {
-                if (((CheckBox) view).isChecked()) {
-                    if (!saveNameList.contains(((CheckBox) view).getText().toString())) {
-                        saveNameList.add(((CheckBox) view).getText().toString());
+            CheckBox tempBox = (CheckBox) searchLayout.getChildAt(i);
+            if (tempBox.isChecked()) {
+                String tempNameString = tempBox.getText().toString();
+                System.out.println(tempNameString);
+                if (saveNameList.size() == 0) {
+                    saveNameList.add(fetch(tempNameString));
+                } else {
+                    Boolean contains = false;
+                    for (int h = 0; h < saveNameList.size(); h++) {
+                        if (saveNameList.get(h).getName().equals(tempNameString)) {
+                            contains = true;
+                            System.out.println(tempNameString);
+                        }
                     }
+                    if(!contains) saveNameList.add(fetch(tempNameString));
                 }
             }
         }
-        SharedPreferences.Editor edit = mPrefs.edit();
-        edit.putStringSet("names", new HashSet<String>(saveNameList));
-        edit.commit();
-//        for (int i = 0; i < saveNameList.size(); i++) {
-//            Log.w("NAME IN INDEX " + i, saveNameList.get(i));
-//        }
-//        retrieved = new ArrayList<String>(PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getStringSet("names", new HashSet<String>()));
-//        Log.w("TEST", "SIZE IS " + retrieved.size());
+//        SharedPreferences.Editor edit = mPrefs.edit();
+//        edit.putStringSet("names", new HashSet<String>(saveNameList));
+//        edit.commit();
 
+        SharedPreferences mPrefs = getSharedPreferences("saveNames", 0);
+        SharedPreferences.Editor editor = mPrefs.edit();
+
+        Set<String> set = new HashSet<>();
+        for (int i = 0; i < saveNameList.size(); i++) {
+            System.out.println(saveNameList.get(i).getJSONObject().toString());
+            set.add(saveNameList.get(i).getJSONObject().toString());
+        }
+        editor.putStringSet("saveNames", set);
+        editor.commit();
     }
 
+    public ArrayList<Name> getNames() {
+        mPrefs = getPreferences(MODE_PRIVATE);
+        ArrayList<Name> items = new ArrayList<Name>();
+        Set<String> set = mPrefs.getStringSet("saveNames", null);
+        if (set != null) {
+            for (String s : set) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    String id = jsonObject.getString("id");
+                    String name = jsonObject.getString("name");
+                    String sex = jsonObject.getString("sex");
+
+                    ArrayList<Double> popularity = new ArrayList<>();
+                    JSONArray jArray = jsonObject.getJSONArray("popularity");
+                    if (jArray != null) {
+                        for (int i = 0; i < jArray.length(); i++) {
+                            popularity.add(jArray.getDouble(i));
+                        }
+                    }
+                    Name tName = new Name(name, sex, id, popularity);
+                    items.add(tName);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return items;
+    }
+
+    private Name fetch(String name) {
+        Name n;
+        if (nameList.size() > 0) {
+            for (int i = 0; i < nameList.size(); i++) {
+                n = nameList.get(i);
+                if (n.getName().equals(name) && n.getSex().equals(gender)) {
+                    return n;
+                }
+            }
+        }
+        return null;
+    }
 }

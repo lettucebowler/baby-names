@@ -14,20 +14,20 @@ import android.widget.*;
 import com.example.sasha.finalsoftware.R;
 import com.example.sasha.finalsoftware.data.Name;
 import com.google.api.Distribution;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class MyNamesActivity extends AppCompatActivity {
 
     private SharedPreferences mPrefs;
-    private List<String> retrieved;
+    private List<Name> retrieved;
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         refresh();
     }
 
@@ -37,7 +37,7 @@ public class MyNamesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_names);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        retrieved = new ArrayList<>(Objects.requireNonNull(PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getStringSet("names", new HashSet<String>())));
+        retrieved = getNames();
         Log.w("IN ON CREATE", retrieved.toString());
         mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         Button graphButton = findViewById(R.id.graphButton);
@@ -48,7 +48,7 @@ public class MyNamesActivity extends AppCompatActivity {
 
         final LinearLayout nameLayout = findViewById(R.id.nameLayout);
         refresh();
-        ArrayList<String> removeList = new ArrayList<>();
+//        ArrayList<Name> removeList = new ArrayList<>();
 //        String remove;
         Button unsaveButton = findViewById(R.id.unsaveButton);
         unsaveButton.setOnClickListener(v -> {
@@ -57,23 +57,23 @@ public class MyNamesActivity extends AppCompatActivity {
                     CheckBox temp = ((CheckBox) (nameLayout.getChildAt(i)));
                     if (temp.isChecked()) {
                         String remove = temp.getText().toString();
-                        removeList.add(remove);
+                        for(int h = 0; h < retrieved.size(); h++) {
+                            Name tempName = retrieved.get(h);
+                            if(tempName.getName().equals(remove)) {
+                                retrieved.remove(h);
+                            }
+                        }
                     }
                 }
-                String remove2;
+                SharedPreferences mPrefs = getApplicationContext().getSharedPreferences("saveNames", 0);
+                SharedPreferences.Editor editor = mPrefs.edit();
+                Set<String> set = new HashSet<>();
                 for (int i = 0; i < retrieved.size(); i++) {
-                    remove2 = retrieved.get(i);
-                    if (removeList.contains(remove2)) {
-                        retrieved.remove(i);
-                        i--;
-                    }
+                    set.add(retrieved.get(i).getJSONObject().toString());
                 }
-                SharedPreferences.Editor edit = mPrefs.edit();
-                edit.putStringSet("names", new HashSet<String>(retrieved));
-                edit.commit();
-                while (nameLayout.getChildCount() - retrieved.size() > 1) {
-                    refresh();
-                }
+                editor.putStringSet("saveNames", set);
+                editor.commit();
+
             }
         });
     }
@@ -84,7 +84,7 @@ public class MyNamesActivity extends AppCompatActivity {
         if (retrieved.size() > 0) {
             for (int i = 0; i < retrieved.size(); i++) {
                 final CheckBox rowCheckBox = new CheckBox(this);
-                rowCheckBox.setText(retrieved.get(i));
+                rowCheckBox.setText(retrieved.get(i).getName());
                 rowCheckBox.setTextSize(36);
                 nameLayout.addView(rowCheckBox);
             }
@@ -97,5 +97,35 @@ public class MyNamesActivity extends AppCompatActivity {
             });
             nameLayout.addView(getButton);
         }
+    }
+
+    public ArrayList<Name> getNames() {
+        SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+        ArrayList<Name> items = new ArrayList<>();
+        Set<String> set = mPrefs.getStringSet("saveNames", null);
+        if (set != null) {
+            System.out.println("not null");
+            for (String s : set) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    String id = jsonObject.getString("id");
+                    String name = jsonObject.getString("name");
+                    String sex = jsonObject.getString("sex");
+                    ArrayList<Double> popularity = new ArrayList<>();
+                    JSONArray jArray = jsonObject.getJSONArray("popularity");
+                    if (jArray != null) {
+                        for (int i = 0; i < jArray.length(); i++) {
+                            popularity.add(jArray.getDouble(i));
+                        }
+                    }
+                    Name tName = new Name(name, sex, id, popularity);
+                    System.out.println(tName.getName());
+                    items.add(tName);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return items;
     }
 }
