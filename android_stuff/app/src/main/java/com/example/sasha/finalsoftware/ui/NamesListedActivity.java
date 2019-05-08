@@ -82,6 +82,7 @@ public class NamesListedActivity extends AppCompatActivity {
         });
         searchButton.setOnClickListener(e -> {
             searchLayout.setEnabled(true);
+            searchLayout.removeAllViews();
             gender = sexSpinner.getSelectedItem().toString();
             String search;
             try {
