@@ -8,6 +8,8 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import com.example.sasha.finalsoftware.R;
 import com.example.sasha.finalsoftware.data.Name;
 import lecho.lib.hellocharts.gesture.ContainerScrollType;
@@ -85,32 +87,27 @@ public class GraphActivity extends AppCompatActivity {
                 });
                 Random rnd2 = new Random();
                 int color2 = Color.argb(255, rnd2.nextInt(256), rnd2.nextInt(256), rnd2.nextInt(256));
-                colors.add(color);
+                colors.add(color2);
                 lines.add(new Line(pointValues2).setColor(color2).setStrokeWidth(2).setHasLabels(false).setHasPoints(false).setCubic(true));
                 System.out.println(lines.size());
             }
 
-            chartData = new LineChartData(lines);
+            TextView nameView1 = findViewById(R.id.name1);
+            nameView1.setText(graphData.get(0).getName());
+            nameView1.setTextColor(colors.get(0));
 
-//            List<AxisValue> axisValuesForX = new ArrayList<>();
-//            List<AxisValue> axisValuesForY = new ArrayList<>();
-//            AxisValue tempAxisValue;
-//            for (float i = 1880; i < 2009; i++) {
-//                tempAxisValue = new AxisValue(i);
-//                tempAxisValue.setLabel("" + i);
-//                axisValuesForX.add(tempAxisValue);
-//            }
-//
-//            for (float i = 0.0000f; i <= 1; i += 0.001) {
-//                tempAxisValue = new AxisValue(i);
-//                tempAxisValue.setLabel("" + i);
-//                axisValuesForY.add(tempAxisValue);
-//            }
-//
-//            Axis xAxis = new Axis(axisValuesForX);
-//            chartData.setAxisXBottom(xAxis);
-//            Axis yAxis = new Axis(axisValuesForY);
-//            chartData.setAxisYLeft(yAxis);
+            TextView nameView2 = findViewById(R.id.name2);
+            if(graphData.size() > 1) {
+                nameView2.setText(graphData.get(1).getName());
+                nameView2.setTextColor(colors.get(1));
+            }
+            else nameView2.setText("");
+
+            TextView maxView = findViewById(R.id.maxView);
+            maxView.setText("" + max);
+
+
+            chartData = new LineChartData(lines);
 
             chart.setLineChartData(chartData);
             final Viewport v = new Viewport(chart.getMaximumViewport());
@@ -121,6 +118,17 @@ public class GraphActivity extends AppCompatActivity {
 //Optional step: disable viewport recalculations, thanks to this animations will not change viewport automatically.
             chart.setViewportCalculationEnabled(false);
             chart.setZoomEnabled(false);
+
+            EditText startNum = findViewById(R.id.startNum);
+
+            Button calcButton = findViewById(R.id.calcButton);
+            calcButton.setOnClickListener(b -> {
+                final Viewport f = new Viewport(chart.getMaximumViewport());
+                v.top = max + .000005f; //example max value
+                v.bottom = 0;  //example min value
+                v.left = Integer.parseInt(startNum.getText().toString());
+                chart.setCurrentViewport(f);
+            });
         }
     }
 
