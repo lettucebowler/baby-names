@@ -68,9 +68,10 @@ public class GraphActivity extends AppCompatActivity {
 
             chart.setLineChartData(chartData);
             Viewport v = new Viewport(chart.getMaximumViewport());
-            v.top = max + .000005f; //example max value
-            v.bottom = 0;  //example min value
+            v.top = max + .05f; //example max value
+            v.bottom = 0 - .05f;  //example min value
             chart.setCurrentViewport(v);
+            chart.setZoomEnabled(false);
 
             Spinner startSpinner = findViewById(R.id.startSpinner);
             Spinner endSpinner = findViewById(R.id.endSpinner);
@@ -114,7 +115,7 @@ public class GraphActivity extends AppCompatActivity {
             pointValues1.add(new PointValue(x, tempPop.floatValue()));
             x++;
         }
-        lines.add(new Line(pointValues1).setColor(Color.BLUE).setStrokeWidth(2).setHasLabels(false).setHasPoints(false).setCubic(false));
+        lines.add(new Line(pointValues1).setColor(Color.BLUE).setStrokeWidth(2).setHasLabels(false).setHasPoints(false).setCubic(true));
 
         if (graphData.size() > 1) {
             x = 0;
@@ -127,7 +128,7 @@ public class GraphActivity extends AppCompatActivity {
                 pointValues2.add(new PointValue(x, tempPop.floatValue()));
                 x++;
             }
-            lines.add(new Line(pointValues2).setColor(Color.RED).setStrokeWidth(2).setHasLabels(false).setHasPoints(false).setCubic(false));
+            lines.add(new Line(pointValues2).setColor(Color.RED).setStrokeWidth(2).setHasLabels(false).setHasPoints(false).setCubic(true));
         }
         return lines;
     }
