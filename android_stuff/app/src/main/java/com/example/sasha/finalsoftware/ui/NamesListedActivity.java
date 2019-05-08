@@ -52,7 +52,7 @@ public class NamesListedActivity extends AppCompatActivity {
         sexSpinner.setAdapter(adapter);
         Button searchButton = findViewById(R.id.searchButton);
         searchLayout = findViewById(R.id.searchLinear);
-        searchLayout.setEnabled(false);
+//        searchLayout.setEnabled(false);
         searchButton.setEnabled(false);
         mDatabase.orderByChild("name").addChildEventListener(new ChildEventListener() {
             @Override
@@ -60,6 +60,7 @@ public class NamesListedActivity extends AppCompatActivity {
                 Name tempName = dataSnapshot.getValue(Name.class);
                 tempName.setId(dataSnapshot.getKey());
                 nameList.add(tempName);
+                //System.out.println("enabled");
                 searchButton.setEnabled(true);
             }
 
@@ -85,17 +86,18 @@ public class NamesListedActivity extends AppCompatActivity {
             String search;
             try {
                 search = searchBar.getQuery().toString();
-                System.out.println(search);
+//                System.out.println(search);
             } catch (StringIndexOutOfBoundsException ef) {
                 search = "*";
             }
-            searchLayout.removeAllViews();
+            //searchLayout.removeAllViews();
             temp = search;
-            System.out.println("True");
-            System.out.println(temp);
+//            System.out.println("True");
+//            System.out.println(temp);
             nameList.forEach(name -> {
                 if (name.getName().toLowerCase().matches(temp.replace("?", ".?").replace("*",
                         ".*?").toLowerCase()) && name.getSex().equals(gender)) {
+                    System.out.println("True");
                     tempCheck = new CheckBox(getApplicationContext());
                     tempCheck.setText(name.getName());
                     tempCheck.setTextSize(36);
@@ -103,19 +105,17 @@ public class NamesListedActivity extends AppCompatActivity {
                 }
             });
         });
-        Button viewButton = findViewById(R.id.viewButton);
-        viewButton.setOnClickListener(e -> {
-            Intent myIntent = new Intent(getApplicationContext(), GraphActivity.class);
-            startActivity(myIntent);
-        });
-
     }
 
     public void saveNames(View view) {
         saveNameList = getNames();
-        System.out.println("saveNames");
-        saveNameList.addAll(getSelected());
-        if(saveNameList.size() > 0) {
+        ArrayList<Name> selected = getSelected();
+        selected.forEach(name -> {
+            if(!saveNameList.contains(name)) {
+                saveNameList.add(name);
+            }
+        });
+        if (saveNameList.size() > 0) {
             SharedPreferences.Editor editor = mPrefs.edit();
             Set<String> set = new HashSet<>();
             for (int i = 0; i < saveNameList.size(); i++) {
@@ -123,10 +123,9 @@ public class NamesListedActivity extends AppCompatActivity {
                 set.add(saveNameList.get(i).getJSONObject().toString());
             }
             editor.putStringSet("saveNames", set);
-            editor.commit();
-        }
-        else {
-            Toast.makeText(getApplicationContext(),"No names to save.",Toast.LENGTH_SHORT).show();
+            editor.apply();
+        } else {
+            Toast.makeText(getApplicationContext(), "No names to save.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -173,31 +172,16 @@ public class NamesListedActivity extends AppCompatActivity {
 
     private ArrayList<Name> getSelected() {
         ArrayList<Name> selected = new ArrayList<>();
-        if(searchLayout.getChildCount() > 0) {
+        if (searchLayout.getChildCount() > 0) {
             for (int i = 0; i < searchLayout.getChildCount(); i++) {
                 CheckBox tempBox = (CheckBox) searchLayout.getChildAt(i);
                 if (tempBox.isChecked()) {
                     String tempNameString = tempBox.getText().toString();
-//                System.out.println(tempNameString);
-                    if (selected.size() == 0) {
-                        selected.add(fetch(tempNameString));
-                    } else {
-                        Boolean contains = false;
-                        if(!saveNameList.isEmpty()) {
-                            for (int h = 0; h < selected.size(); h++) {
-                                if (saveNameList.get(h).getName().equals(tempNameString)) {
-                                    contains = true;
-                                    System.out.println(tempNameString);
-                                }
-                            }
-                        }
-                        if(!contains) saveNameList.add(fetch(tempNameString));
-                    }
+                    saveNameList.add(fetch(tempNameString));
                 }
             }
-        }
-        else {
-            Toast.makeText(getApplicationContext(),"No Names",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "No Names", Toast.LENGTH_SHORT).show();
         }
         return selected;
     }
