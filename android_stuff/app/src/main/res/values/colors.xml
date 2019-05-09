@@ -3,8 +3,8 @@
     <color name="colorPrimary">@color/colorMaroon</color>
     <color name="colorPrimaryDark">@color/colorMaroon</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorMaroon">#7a0019</color>
+    <color name="colorMaroon">#7A0019</color>
     <color name="colorGold">#ffcc33</color>
-    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
 </resources>

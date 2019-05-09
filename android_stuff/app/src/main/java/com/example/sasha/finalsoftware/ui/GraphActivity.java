@@ -10,13 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.widget.*;
 import com.example.sasha.finalsoftware.R;
 import com.example.sasha.finalsoftware.data.Name;
-import lecho.lib.hellocharts.gesture.ContainerScrollType;
-import lecho.lib.hellocharts.model.*;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class GraphActivity extends AppCompatActivity {
 

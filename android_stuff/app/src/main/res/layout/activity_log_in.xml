@@ -8,6 +8,20 @@
                                              tools:context="com.example.sasha.finalsoftware.ui.LogIn"
                                              tools:layout_editor_absoluteY="81dp">
 
+    <TextView
+            android:id="@+id/accountInfo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="From 1880 to 2008"
+            android:textColor="@color/colorWhite"
+            android:textSize="40sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="From 1880 to 2008" app:layout_constraintTop_toBottomOf="@+id/accountInfo"/>
     <com.google.android.gms.common.SignInButton
             android:id="@+id/googleLogIn"
             android:layout_width="wrap_content"
@@ -37,13 +51,13 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="TextView"
+            android:text="Baby Name\nCenus Data"
             android:textColor="@color/colorWhite"
-            android:textSize="75sp"
+            android:textSize="60sp"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="BabyNames"/>
+            tools:text="Baby Name\nCenus Data"/>
 
 </android.support.constraint.ConstraintLayout>
