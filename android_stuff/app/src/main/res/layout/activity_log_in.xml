@@ -21,12 +21,13 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="From 1880 to 2008" app:layout_constraintTop_toBottomOf="@+id/loginTitleText"/>
+            tools:text="From 1880 to 2008" app:layout_constraintTop_toBottomOf="@+id/loginTitleText"
+            android:textAlignment="center"/>
     <com.google.android.gms.common.SignInButton
             android:id="@+id/googleLogIn"
             android:layout_width="150sp"
             android:layout_height="60sp"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="16dp"></com.google.android.gms.common.SignInButton>
@@ -34,14 +35,14 @@
     <Button
             android:id="@+id/googleLogOut"
             android:layout_width="150sp"
-            android:layout_height="60sp"
-            android:layout_marginEnd="48dp"
+            android:layout_height="53sp"
+            android:layout_marginEnd="30dp"
             android:background="@color/colorWhite"
             android:onClick="onClick"
             android:text="logout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="18dp"/>
 
     <TextView
             android:id="@+id/loginTitleText"
@@ -57,6 +58,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Baby Name\nCenus Data"/>
+            tools:text="Baby Name\nCenus Data" android:textAlignment="center"/>
 
 </android.support.constraint.ConstraintLayout>
