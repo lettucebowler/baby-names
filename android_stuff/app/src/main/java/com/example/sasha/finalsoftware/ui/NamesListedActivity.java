@@ -1,5 +1,6 @@
 package com.example.sasha.finalsoftware.ui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -85,20 +86,21 @@ public class NamesListedActivity extends AppCompatActivity {
             String search;
             try {
                 search = searchBar.getQuery().toString();
+                temp = search;
+                nameList.forEach(name -> {
+                    if (name.getName().toLowerCase().matches(temp.replace("?", ".?").replace("*",
+                            ".*?").toLowerCase()) && name.getSex().equals(gender)) {
+                        System.out.println("True");
+                        tempCheck = new CheckBox(getApplicationContext());
+                        tempCheck.setText(name.getName());
+                        tempCheck.setTextSize(36);
+                        searchLayout.addView(tempCheck);
+                    }
+                });
             } catch (StringIndexOutOfBoundsException ef) {
-                search = "*";
+                Toast.makeText(getApplicationContext(), "Search bar empty", Toast.LENGTH_SHORT).show();
             }
-            temp = search;
-            nameList.forEach(name -> {
-                if (name.getName().toLowerCase().matches(temp.replace("?", ".?").replace("*",
-                        ".*?").toLowerCase()) && name.getSex().equals(gender)) {
-                    System.out.println("True");
-                    tempCheck = new CheckBox(getApplicationContext());
-                    tempCheck.setText(name.getName());
-                    tempCheck.setTextSize(36);
-                    searchLayout.addView(tempCheck);
-                }
-            });
+
         });
     }
 
@@ -106,7 +108,7 @@ public class NamesListedActivity extends AppCompatActivity {
         saveNameList = getNames();
         ArrayList<Name> selected = getSelected();
         selected.forEach(name -> {
-            if (!saveNameList.contains(name)) {
+            if(!saveNameList.contains(name)) {
                 saveNameList.add(name);
             }
         });
