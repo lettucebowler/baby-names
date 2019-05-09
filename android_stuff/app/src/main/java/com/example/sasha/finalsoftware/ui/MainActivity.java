@@ -25,4 +25,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(myIntent);
     }
 
+    public void switchToDiscoverNames(View myView) {
+        Intent myIntent = new Intent(MainActivity.this, DiscoverNamesActivity.class);
+        startActivity(myIntent);
+    }
+
 }

@@ -17,6 +17,11 @@
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
+                android:name=".ui.DiscoverNamesActivity"
+                android:label="Discover new names"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
                 android:name=".ui.MyNamesActivity"
                 android:label="@string/title_activity_my_names"
                 android:theme="@style/AppTheme.NoActionBar">

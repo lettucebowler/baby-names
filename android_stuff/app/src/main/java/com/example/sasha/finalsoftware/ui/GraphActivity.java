@@ -13,7 +13,6 @@ import com.example.sasha.finalsoftware.data.Name;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
-import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ public class GraphActivity extends AppCompatActivity {
 
     private LineChartView chart;
     private ArrayList<Name> graphData;
+    private TextView maxView;
     private int x;
     private float max;
 
@@ -64,15 +64,16 @@ public class GraphActivity extends AppCompatActivity {
 
             chartData = new LineChartData(createLines(1880, 2008));
 
-            TextView maxView = findViewById(R.id.maxView);
+            maxView = findViewById(R.id.maxView);
             maxView.setText("" + max);
 
             chart.setLineChartData(chartData);
-            Viewport v = new Viewport(chart.getMaximumViewport());
-            v.top = max + .05f; //example max value
-            v.bottom = 0 - .05f;  //example min value
-            chart.setCurrentViewport(v);
+//            Viewport v = new Viewport(chart.getMaximumViewport());
+////            v.top = max * 1.1f; //example max value
+////            v.bottom = 0 - max * .1f;  //example min value
+////            chart.setCurrentViewport(v);
             chart.setZoomEnabled(false);
+//            chart.setViewportCalculationEnabled(false);
 
             Spinner startSpinner = findViewById(R.id.startSpinner);
             Spinner endSpinner = findViewById(R.id.endSpinner);
@@ -86,11 +87,8 @@ public class GraphActivity extends AppCompatActivity {
 
             Button calcButton = findViewById(R.id.calcButton);
             calcButton.setOnClickListener(b -> {
-                System.out.println("calcButton");
                 Integer newLeft = Integer.parseInt(startSpinner.getSelectedItem().toString());
                 Integer newRight = Integer.parseInt(endSpinner.getSelectedItem().toString());
-                System.out.println("Left  : " + newLeft);
-                System.out.println("Right : " + newRight);
                 if (newRight > newLeft) {
                     chartData.setLines(createLines(newLeft, newRight));
                     chart.setLineChartData(chartData);
@@ -102,12 +100,12 @@ public class GraphActivity extends AppCompatActivity {
     }
 
     private ArrayList<Line> createLines(int start, int end) {
+        ArrayList<Line> lines = new ArrayList<>();
         ArrayList<PointValue> pointValues1 = new ArrayList<>();
         ArrayList<PointValue> pointValues2 = new ArrayList<>();
-        ArrayList<Line> lines = new ArrayList<>();
         x = 0;
         List<Double> tempPopularity = graphData.get(0).getPopularity();
-        max = tempPopularity.get(0).floatValue();
+        max = tempPopularity.get(start - 1880).floatValue();
         for (int i = start; i < end + 1; i++) {
             Double tempPop = tempPopularity.get(i - 1880);
             if (tempPop.floatValue() > max) {
@@ -131,6 +129,8 @@ public class GraphActivity extends AppCompatActivity {
             }
             lines.add(new Line(pointValues2).setColor(Color.RED).setStrokeWidth(2).setHasLabels(false).setHasPoints(false).setCubic(true));
         }
+        maxView = findViewById(R.id.maxView);
+        maxView.setText("" + max);
         return lines;
     }
 
