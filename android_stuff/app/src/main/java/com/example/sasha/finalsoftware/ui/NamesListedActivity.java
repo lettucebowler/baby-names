@@ -52,7 +52,6 @@ public class NamesListedActivity extends AppCompatActivity {
         sexSpinner.setAdapter(adapter);
         Button searchButton = findViewById(R.id.searchButton);
         searchLayout = findViewById(R.id.searchLinear);
-//        searchLayout.setEnabled(false);
         searchButton.setEnabled(false);
         mDatabase.orderByChild("name").addChildEventListener(new ChildEventListener() {
             @Override
@@ -87,14 +86,10 @@ public class NamesListedActivity extends AppCompatActivity {
             String search;
             try {
                 search = searchBar.getQuery().toString();
-//                System.out.println(search);
             } catch (StringIndexOutOfBoundsException ef) {
                 search = "*";
             }
-            //searchLayout.removeAllViews();
             temp = search;
-//            System.out.println("True");
-//            System.out.println(temp);
             nameList.forEach(name -> {
                 if (name.getName().toLowerCase().matches(temp.replace("?", ".?").replace("*",
                         ".*?").toLowerCase()) && name.getSex().equals(gender)) {
