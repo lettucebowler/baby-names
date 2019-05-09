@@ -14,7 +14,8 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintTop_toBottomOf="@+id/searchButton"
-            app:layout_constraintBottom_toTopOf="@+id/saveNamesButton" android:background="@color/colorWhite">
+            app:layout_constraintBottom_toTopOf="@+id/saveNamesButton" android:background="@color/colorWhite"
+            android:layout_marginTop="2dp" android:layout_marginBottom="4dp">
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -56,10 +57,10 @@
             android:background="@color/colorWhite"/>
     <Spinner
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:id="@+id/sexSpinner" app:layout_constraintStart_toEndOf="@+id/searchButton"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginStart="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/searchBar" android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/searchButton" android:layout_marginBottom="4dp"
-            android:background="@android:drawable/btn_dropdown"/>
+            android:background="@android:drawable/btn_dropdown"
+            app:layout_constraintTop_toTopOf="@+id/searchButton"
+            app:layout_constraintBottom_toBottomOf="@+id/searchButton"/>
 </android.support.constraint.ConstraintLayout>
