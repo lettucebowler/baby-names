@@ -8,42 +8,55 @@
                                              tools:context="com.example.sasha.finalsoftware.ui.LogIn"
                                              tools:layout_editor_absoluteY="81dp">
 
-    <com.google.android.gms.common.SignInButton
-            android:id="@+id/googleLogIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.common.SignInButton>
-
-    <Button
-            android:id="@+id/googleLogOut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:background="@color/colorWhite"
-            android:onClick="onClick"
-            android:text="logout"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toEndOf="@+id/googleLogIn" />
-
     <TextView
-            android:id="@+id/accountInfo"
+            android:id="@+id/loginDescriptionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="TextView"
+            android:text="From 1880 to 2008"
             android:textColor="@color/colorWhite"
-            android:textSize="75sp"
+            android:textSize="40sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="From 1880 to 2008" app:layout_constraintTop_toBottomOf="@+id/loginTitleText"/>
+    <com.google.android.gms.common.SignInButton
+            android:id="@+id/googleLogIn"
+            android:layout_width="150sp"
+            android:layout_height="60sp"
+            android:layout_marginStart="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="16dp"></com.google.android.gms.common.SignInButton>
+
+    <Button
+            android:id="@+id/googleLogOut"
+            android:layout_width="150sp"
+            android:layout_height="60sp"
+            android:layout_marginEnd="48dp"
+            android:background="@color/colorWhite"
+            android:onClick="onClick"
+            android:text="logout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="16dp"/>
+
+    <TextView
+            android:id="@+id/loginTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Baby Name\nCenus Data"
+            android:textColor="@color/colorWhite"
+            android:textSize="60sp"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="BabyNames"/>
+            tools:text="Baby Name\nCenus Data"/>
 
 </android.support.constraint.ConstraintLayout>

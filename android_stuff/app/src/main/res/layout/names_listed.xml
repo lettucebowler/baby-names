@@ -5,7 +5,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.sasha.finalsoftware.ui.NamesListedActivity" android:id="@+id/searchConstraintLayout">
+        tools:context="com.example.sasha.finalsoftware.ui.NamesListedActivity" android:id="@+id/searchConstraintLayout"
+        android:background="@color/colorMaroon">
     <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -13,7 +14,7 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintTop_toBottomOf="@+id/searchButton"
-            app:layout_constraintBottom_toTopOf="@+id/saveNamesButton">
+            app:layout_constraintBottom_toTopOf="@+id/saveNamesButton" android:background="@color/colorWhite">
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -51,12 +52,14 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="16dp"
             android:id="@+id/searchBar" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:background="@color/colorWhite"/>
     <Spinner
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:id="@+id/sexSpinner" app:layout_constraintStart_toEndOf="@+id/searchButton"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginStart="8dp"
             app:layout_constraintTop_toBottomOf="@+id/searchBar" android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/searchButton" android:layout_marginBottom="4dp"/>
+            app:layout_constraintBottom_toBottomOf="@+id/searchButton" android:layout_marginBottom="4dp"
+            android:background="@android:drawable/btn_dropdown"/>
 </android.support.constraint.ConstraintLayout>

@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button myNamesButton = findViewById(R.id.LikeListButton);
+        Button myNamesButton = findViewById(R.id.savedNamesButton);
         myNamesButton.setOnClickListener(e -> switchToMyNames());
 }
     public void switchToNamesListed(View myView) {
