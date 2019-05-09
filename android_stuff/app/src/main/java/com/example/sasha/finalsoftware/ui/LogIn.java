@@ -41,7 +41,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener,
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions).build();
-        accountInfo = (TextView)findViewById(R.id.accountInfo);
+        accountInfo = (TextView) findViewById(R.id.loginTitleText);
         accountInfo.setText("Baby Name\nCenus Data");
 
     }

@@ -8,7 +8,7 @@
         tools:context="com.example.sasha.finalsoftware.ui.MainActivity" android:background="@color/colorMaroon">
 
     <TextView
-            android:id="@+id/accountInfo4"
+            android:id="@+id/welcomeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Welcome!"/>
     <TextView
-            android:id="@+id/accountInfo3"
+            android:id="@+id/selectOptionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -35,7 +35,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Select an option" app:layout_constraintTop_toBottomOf="@+id/accountInfo4"
+            tools:text="Select an option" app:layout_constraintTop_toBottomOf="@+id/welcomeText"
             android:textAlignment="center"/>
     <Button
             android:text="Search Names"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content" android:id="@+id/searchButton"
             android:onClick="switchToNamesListed"
             android:layout_marginTop="150dp"
-            app:layout_constraintTop_toBottomOf="@+id/accountInfo3" android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/selectOptionText" android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"/>
     <Button
