@@ -68,12 +68,7 @@ public class GraphActivity extends AppCompatActivity {
             maxView.setText("" + max);
 
             chart.setLineChartData(chartData);
-//            Viewport v = new Viewport(chart.getMaximumViewport());
-////            v.top = max * 1.1f; //example max value
-////            v.bottom = 0 - max * .1f;  //example min value
-////            chart.setCurrentViewport(v);
             chart.setZoomEnabled(false);
-//            chart.setViewportCalculationEnabled(false);
 
             Spinner startSpinner = findViewById(R.id.startSpinner);
             Spinner endSpinner = findViewById(R.id.endSpinner);
